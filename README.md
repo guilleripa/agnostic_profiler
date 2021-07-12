@@ -30,15 +30,18 @@ CREATE EXTENSION pgrouting;
 
 ### Load map
 
-To load our maps we'll be using `osm2pgsql` which translates an OSM XML file into postgis compatible commands and loads the DB.
+To load our maps we'll be using `osm2pgrouting` which translates an OSM XML file into postgis compatible commands and loads the DB.
 
 To install with homebrew it's just:
 ```
-brew install osm2pgsql
+brew install osm2pgrouting
 ```
+
+To run the command which loads the pgrouting db you will need a config file. We are using `mapconfig_for_cars.xml` which you can find at the root of this project.
 
 The command to run is:
 ```
-osm2pgsql -U postgres -W -d postgres -H localhost -P 5432 --hstore --hstore-add-index ~/Downloads/map.osm
+osm2pgrouting --file ~/Downloads/map.osm  --conf mapconfig_for_cars.xml -d postgres -U postgres -W password
 ```
-it will prompt for the DB's password and load the `.osm` file.
+it will create all necessary tables to load the `.osm` file.
+
