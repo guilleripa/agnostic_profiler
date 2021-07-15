@@ -37,10 +37,10 @@ class PgSQLPathFinder:
         )
         self.default_algo = default_algo
 
-    def get_path(self, source_gid, target_gid, algo=None):
-        algo = algo if algo else self.default_algo
+    def get_path(self, source_gid, target_gid, algorithm=None):
+        algorithm = algorithm if algorithm else self.default_algo
 
-        query = QUERIES[algo].format(source_gid, target_gid)
+        query = QUERIES[algorithm].format(source_gid, target_gid)
 
         with self.conn.cursor() as cur:
             cur.execute(query)
