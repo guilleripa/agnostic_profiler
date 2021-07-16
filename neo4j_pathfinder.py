@@ -40,14 +40,16 @@ class Neo4jPathFinder:
         self.driver.close()
 
     def get_path(self, source_gid, target_gid, algorithm=None):
+        # print("Origen: " + str(source_gid) + "Objetivo: " + str(target_gid))
         algorithm = algorithm if algorithm else self.default_algorithm
         query = QUERIES[algorithm]
+        result = {}
         with self.driver.session() as session:
             with session.begin_transaction() as tx:
                 aux = tx.run(query, source_gid=source_gid, target_gid=target_gid)
                 for record in aux:
                     result = record.data()
-                    print(result)
+                    # print(result)
         return result
 
 
