@@ -1,6 +1,6 @@
 # Profiler
 
-Our Profiler is written fully on python in `profiler.py`. It is made accesible a cli command in `pathfinder_profiler.py`
+Our Profiler is written fully on python in `profiler.py`. It is made accesible by a cli command in `pathfinder_profiler.py`
 It follows the paper's research methodology and has options for both pathfinders (neo4j, pgsql) and both algorithms (dijkstra, A star).
 
 To use it you have to follow the setups for each DB and then just call it with:
