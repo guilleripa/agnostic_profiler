@@ -1,5 +1,6 @@
 import csv
 import datetime
+import math
 import threading
 from time import sleep, time
 
@@ -17,7 +18,6 @@ class DisplayMem(threading.Thread):
         self.mems = []
         while self.running:
             mem = psutil.virtual_memory().used >> 20
-            print(f"Total memory in use: {mem}MB")
             self.mems.append(mem)
             sleep(5)
 
@@ -28,10 +28,11 @@ class DisplayMem(threading.Thread):
 
 
 class Profiler:
-    def __init__(self, measure_mem=True):
+    def __init__(self, measure_mem=True, num_threads=1):
         self._load_node_pairs()
         self.pathfinder = None
         self.mem_tracker = DisplayMem() if measure_mem else None
+        self.num_threads = num_threads
 
     def _load_node_pairs(self):
         self.node_pairs = []
@@ -44,14 +45,16 @@ class Profiler:
         if pathfinder == "neo4j":
             self.pathfinder = Neo4jPathFinder()
         else:
-            # self.pathfinder = PgSQLPathFinder(database="osm")
-            self.pathfinder = PgSQLPathFinder()
+            self.pathfinder = PgSQLPathFinder(database="osm")
+            # self.pathfinder = PgSQLPathFinder()
 
-    def _run_pathfinder(self, algorithm, save_results=True, experiment_name=None):
+    def _run_pathfinder(
+        self, algorithm, node_pairs, save_results=True, experiment_name=None
+    ):
         start_time = time()
 
         results = []
-        for source_gid, target_gid in self.node_pairs:
+        for source_gid, target_gid in node_pairs:
 
             path_start_time = time()
             result = self.pathfinder.get_path(
@@ -87,7 +90,9 @@ class Profiler:
         except IOError:
             print(f"Error while saving csv file for experiment={experiment_name}")
 
-    def run_experiments(self, pathfinder, experiment_name=None, algorithm="dijkstra"):
+    def run_experiments(
+        self, thread_id, pathfinder, experiment_name, algorithm, node_pairs
+    ):
         """
         arguments:
         - pathfinder (str): Must be one of ['neo4j', 'pgsql'].
@@ -96,27 +101,72 @@ class Profiler:
                 Must be one of ['dijkstra', 'astar']
         """
 
-        if not experiment_name:
-            experiment_name = (
-                f"{datetime.datetime.now():%y-%m-%d-%H%M}_{pathfinder}_{algorithm}"
-            )
-
         if self.pathfinder:
             print("Path finder already loaded :)")
         else:
             print(f"Loading pathfinder {pathfinder}")
             self._load_pathfinder(pathfinder)
 
-        print("Start experiments")
+        print(f"Thread {thread_id}: Start experiments")
+
+        print(f"Thread {thread_id}: Run cold start queries")
+        self._run_pathfinder(
+            algorithm,
+            node_pairs,
+            experiment_name=f"{experiment_name}_thread{thread_id}_cold",
+        )
+
+        print(f"Thread {thread_id}: Run hot start queries")
+        self._run_pathfinder(
+            algorithm,
+            node_pairs,
+            experiment_name=f"{experiment_name}_thread{thread_id}_hot",
+        )
+
+    def run_threaded_experiment(
+        self, pathfinder, experiment_name=None, algorithm="dijkstra"
+    ):
+        if not experiment_name:
+            experiment_name = (
+                f"{datetime.datetime.now():%y-%m-%d-%H%M}_{pathfinder}_{algorithm}"
+            )
 
         if self.mem_tracker:
             self.mem_tracker.start()
 
-        print("Run cold start queries")
-        self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_cold")
+        if self.num_threads == 1:
+            self.run_experiments(
+                0, pathfinder, f"{experiment_name}_thread0", algorithm, self.node_pairs
+            )
+        else:
+            start_time = time()
+            threads = []
+            node_interval = math.ceil(len(self.node_pairs) / self.num_threads)
+            for index in range(self.num_threads):
+                print(f"Main    : create and start thread {index}.")
+                thread_node_pairs = self.node_pairs[
+                    node_interval * index : node_interval * (index + 1)
+                ]
+                x = threading.Thread(
+                    target=self.run_experiments,
+                    args=(
+                        index,
+                        pathfinder,
+                        experiment_name,
+                        algorithm,
+                        thread_node_pairs,
+                    ),
+                )
+                threads.append(x)
+                x.start()
 
-        print("Run hot start queries")
-        self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_hot")
+            for index, thread in enumerate(threads):
+                print(f"Main    : before joining thread {index}.")
+                thread.join()
+                print(f"Main    : thread {index} done")
+
+            elapsed_time = time() - start_time
+            print(f"Finished running main thread. All tests took: {elapsed_time:.2f}s")
 
         if self.mem_tracker:
             self.mem_tracker.stop()
