@@ -7,4 +7,5 @@ neo4j==4.3.2
 geopandas==0.9.0
 SQLAlchemy==1.4.18
 matplotlib==3.4.2
-memory-profiler==0.58.0
+pyarrow==4.0.1
+psutil==5.8.0

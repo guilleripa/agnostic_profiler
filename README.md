@@ -1,8 +1,33 @@
+# Profiler
+
+Our Profiler is written fully on python in `profiler.py`. It is made accesible a cli command in `pathfinder_profiler.py`
+It follows the paper's research methodology and has options for both pathfinders (neo4j, pgsql) and both algorithms (dijkstra, A star).
+
+To use it you have to follow the setups for each DB and then just call it with:
+```
+python pathfinder_profiler.py --pathfinder pgsql --algorithm dijkstra
+```
+
+Though remember to create a virtual env to setup the requirements.
+
+To create a virtual environment for python and activate it. You can do:
+```
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Then install all the necessary deps:
+```
+pip install -r requirements.txt
+```
+
+Python version: >=3.7.6
+
 # Relational
 
 ## Set up
 
-We'll be using the official pgrouting Docker image to run our relational database.
+We'll be using the official pgrouting Docker image to run our relational database for development. We'll then run a VM on an Ubuntu 18.04 environment for final experiments.
 
 First we pull the image for Docker Hub and run it.
 ```
@@ -10,11 +35,15 @@ docker pull pgrouting/pgrouting
 docker run --name pgrouting -e POSTGRES_PASSWORD=password -p 5432:5432 pgrouting/pgrouting
 ```
 
-After we've runned ir once we can leave running. If we ever close it and need to start it up again we do:
+After we've run it once we can leave it running. If we ever close it and need to start it up again we do:
 ```
 docker start -i pgrouting
 ```
 
+If not running with docker, you can download pgsql from apt:
+```
+apt install postgresql
+```
 ### Create DB and extensions
 
 Once our pgsql DB is running we'll need to add some extensions to it.
@@ -35,6 +64,10 @@ To load our maps we'll be using `osm2pgrouting` which translates an OSM XML file
 To install with homebrew it's just:
 ```
 brew install osm2pgrouting
+```
+For linux it's also easy:
+```
+apt install osm2pgrouting
 ```
 
 To run the command which loads the pgrouting db you will need a config file. We are using `mapconfig_for_cars.xml` which you can find at the root of this project.
@@ -101,11 +134,11 @@ But this is not a Routing graph, to create a Routing graph we need to do some ex
 2. Paste this property values into the neo4j.conf file of our neo4j installation.
 
 ```
-dbms.default_database=osm_database 
+dbms.default_database=osm_database
 dbms.security.procedures.unrestricted=algo.*,apoc.*
 
 ```
-3. Restart Neo4j 
+3. Restart Neo4j
 3. Execute the following queries in the following order:
 
 ```
@@ -123,7 +156,7 @@ CREATE INDEX ON :PointOfInterest(name);
 ```
 
 ```
-CALL apoc.periodic.iterate( 
+CALL apoc.periodic.iterate(
     'MATCH (awn:OSMWayNode)-[r:NEXT]-(bwn:OSMWayNode) WHERE NOT exists(r.distance) RETURN awn,bwn,r',
     'MATCH (awn)-[:NODE]->(a:OSMNode), (bwn)-[:NODE]->(b:OSMNode) SET r.distance = distance(a.location,b.location)',
     {batchSize:10000, parallel: false}
@@ -177,9 +210,9 @@ Shortest path queries example:
 **Dijkstra**
 
 ```
-match (n:Intersection) 
+match (n:Intersection)
     where n.node_osm_id = 4158708257
-match (p:Intersection) 
+match (p:Intersection)
     where p.node_osm_id = 279933912
 CALL apoc.algo.dijkstra(n,p,'ROUTE','distance')
 YIELD path as j
@@ -189,9 +222,9 @@ return j;
 **A***
 
 ```
-match (n:Intersection) 
+match (n:Intersection)
     where n.node_osm_id = 4158708257
-match (p:Intersection) 
+match (p:Intersection)
     where p.node_osm_id = 279933912
 CALL apoc.algo.aStar(n,p,'ROUTE','distance','lat','lon')
 YIELD path as j

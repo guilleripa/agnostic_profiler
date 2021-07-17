@@ -1,26 +1,37 @@
-# Que queremos hacer???
-# mirar laos experimentos del paper
-# 1. [x] cargar los 190 pares de puntos
-# 2. [x] correr las queries y guardar los datos en formato csv.
-#   2.1. se corren dos veces, la primera se guardan como cold times y la segunda como hot
-# 3. Había algunos experimentos de Neo4j weak-strong-heavy algo así, ver que son esas para dejar esas opciones
-
 import csv
 import datetime
-from time import time
+import threading
+from time import sleep, time
 
-from memory_profiler import memory_usage
+import psutil
 
 from neo4j_pathfinder import Neo4jPathFinder
 from pgsql_pathfinder import PgSQLPathFinder
 
 
+class DisplayMem(threading.Thread):
+    def run(self):
+
+        self.running = True
+
+        self.mems = []
+        while self.running:
+            mem = psutil.virtual_memory().used >> 20
+            print(f"Total memory in use: {mem}MB")
+            self.mems.append(mem)
+            sleep(5)
+
+    def stop(self):
+        self.running = False
+        if self.mems:
+            print(f"Max mem used: {max(self.mems)}MB")
+
+
 class Profiler:
-    def __init__(
-        self,
-    ):
+    def __init__(self, measure_mem=True):
         self._load_node_pairs()
         self.pathfinder = None
+        self.mem_tracker = DisplayMem() if measure_mem else None
 
     def _load_node_pairs(self):
         self.node_pairs = []
@@ -98,30 +109,14 @@ class Profiler:
 
         print("Start experiments")
 
+        if self.mem_tracker:
+            self.mem_tracker.start()
+
         print("Run cold start queries")
-        # self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_cold")
-        cold_mem_usage = memory_usage(
-            (
-                self._run_pathfinder,
-                (algorithm,),
-                {"experiment_name": f"{experiment_name}_cold"},
-            )
-        )
-        print(f"max cold mem usage: {max(cold_mem_usage)}")
+        self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_cold")
 
         print("Run hot start queries")
-        # self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_hot")
-        hot_mem_usage = memory_usage(
-            (
-                self._run_pathfinder,
-                (algorithm,),
-                {"experiment_name": f"{experiment_name}_hot"},
-            )
-        )
-        print(f"max hot mem usage: {max(hot_mem_usage)}")
+        self._run_pathfinder(algorithm, experiment_name=f"{experiment_name}_hot")
 
-        # Falta:
-        # 2. Agregar las opciones para los diferentes tipos de experimentos
-        #   2.1 Cuales son esos tipos de experimentos? soft, gcr, weak, strong
-        # Las opciones esas no se manejan desde acá.
-        # Pero si ellos ya probaron que la Garbage collection resistant es mejor, leamos sobre eso, probemos con eso y con el warmup (CALL apoc.warmup.run())
+        if self.mem_tracker:
+            self.mem_tracker.stop()

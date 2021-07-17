@@ -10,8 +10,13 @@ from profiler import Profiler
     "--experiment_name",
     help="Experiment name for the experiments.",
 )
-def main(pathfinder, algorithm, experiment_name):
-    prof = Profiler()
+@click.option(
+    "--no_mem",
+    is_flag=True,
+    help="Experiment name for the experiments.",
+)
+def main(pathfinder, algorithm, experiment_name, no_mem):
+    prof = Profiler(measure_mem=not no_mem)
     prof.run_experiments(
         pathfinder, algorithm=algorithm, experiment_name=experiment_name
     )
