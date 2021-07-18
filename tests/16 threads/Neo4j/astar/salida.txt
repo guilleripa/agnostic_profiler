@@ -1,0 +1,146 @@
+Main    : create and start thread 0.
+Loading pathfinder neo4j
+Main    : create and start thread 1.
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Path finder already loaded :)
+Thread 1: Start experiments
+Thread 1: Run cold start queries
+Main    : create and start thread 2.
+Path finder already loaded :)
+Thread 2: Start experiments
+Thread 2: Run cold start queries
+Main    : create and start thread 3.
+Path finder already loaded :)
+Thread 3: Start experiments
+Thread 3: Run cold start queries
+Main    : create and start thread 4.
+Path finder already loaded :)
+Thread 4: Start experiments
+Thread 4: Run cold start queries
+Main    : create and start thread 5.
+Path finder already loaded :)
+Thread 5: Start experiments
+Thread 5: Run cold start queries
+Main    : create and start thread 6.
+Path finder already loaded :)
+Thread 6: Start experiments
+Thread 6: Run cold start queries
+Main    : create and start thread 7.
+Path finder already loaded :)
+Thread 7: Start experiments
+Thread 7: Run cold start queries
+Main    : create and start thread 8.
+Path finder already loaded :)
+Thread 8: Start experiments
+Thread 8: Run cold start queries
+Main    : create and start thread 9.
+Path finder already loaded :)
+Thread 9: Start experiments
+Thread 9: Run cold start queries
+Main    : create and start thread 10.
+Path finder already loaded :)
+Thread 10: Start experiments
+Thread 10: Run cold start queries
+Main    : create and start thread 11.
+Path finder already loaded :)
+Thread 11: Start experiments
+Thread 11: Run cold start queries
+Main    : create and start thread 12.
+Path finder already loaded :)
+Thread 12: Start experiments
+Thread 12: Run cold start queries
+Main    : create and start thread 13.
+Path finder already loaded :)
+Thread 13: Start experiments
+Thread 13: Run cold start queries
+Main    : create and start thread 14.
+Path finder already loaded :)
+Thread 14: Start experiments
+Thread 14: Run cold start queries
+Main    : create and start thread 15.
+Path finder already loaded :)
+Thread 15: Start experiments
+Thread 15: Run cold start queries
+Main    : before joining thread 0.
+Finished running 21-07-18-1510_neo4j_astar_thread8_cold. Test took: 25.19s
+Thread 8: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread6_cold. Test took: 26.52s
+Thread 6: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread4_cold. Test took: 29.23s
+Thread 4: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread3_cold. Test took: 33.03s
+Thread 3: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread15_cold. Test took: 34.81s
+Thread 15: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread7_cold. Test took: 42.92s
+Thread 7: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread2_cold. Test took: 42.39s
+Thread 2: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread9_cold. Test took: 44.90s
+Thread 9: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread10_cold. Test took: 44.82s
+Thread 10: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread13_cold. Test took: 46.81s
+Thread 13: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread8_hot. Test took: 26.31s
+Finished running 21-07-18-1510_neo4j_astar_thread1_cold. Test took: 52.40s
+Thread 1: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread14_cold. Test took: 52.81s
+Thread 14: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread0_cold. Test took: 53.62s
+Thread 0: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread11_cold. Test took: 53.42s
+Thread 11: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread5_cold. Test took: 60.43s
+Thread 5: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread4_hot. Test took: 30.42s
+Finished running 21-07-18-1510_neo4j_astar_thread6_hot. Test took: 36.64s
+Finished running 21-07-18-1510_neo4j_astar_thread3_hot. Test took: 32.27s
+Finished running 21-07-18-1510_neo4j_astar_thread15_hot. Test took: 30.56s
+Finished running 21-07-18-1510_neo4j_astar_thread12_cold. Test took: 68.92s
+Thread 12: Run hot start queries
+Finished running 21-07-18-1510_neo4j_astar_thread9_hot. Test took: 32.89s
+Finished running 21-07-18-1510_neo4j_astar_thread10_hot. Test took: 34.92s
+Finished running 21-07-18-1510_neo4j_astar_thread2_hot. Test took: 37.19s
+Finished running 21-07-18-1510_neo4j_astar_thread7_hot. Test took: 39.95s
+Finished running 21-07-18-1510_neo4j_astar_thread1_hot. Test took: 31.02s
+Finished running 21-07-18-1510_neo4j_astar_thread13_hot. Test took: 35.36s
+Finished running 21-07-18-1510_neo4j_astar_thread14_hot. Test took: 32.78s
+Finished running 21-07-18-1510_neo4j_astar_thread0_hot. Test took: 31.74s
+Main    : thread 0 done
+Main    : before joining thread 1.
+Main    : thread 1 done
+Main    : before joining thread 2.
+Main    : thread 2 done
+Main    : before joining thread 3.
+Main    : thread 3 done
+Main    : before joining thread 4.
+Main    : thread 4 done
+Main    : before joining thread 5.
+Finished running 21-07-18-1510_neo4j_astar_thread11_hot. Test took: 32.59s
+Finished running 21-07-18-1510_neo4j_astar_thread5_hot. Test took: 28.23s
+Main    : thread 5 done
+Main    : before joining thread 6.
+Main    : thread 6 done
+Main    : before joining thread 7.
+Main    : thread 7 done
+Main    : before joining thread 8.
+Main    : thread 8 done
+Main    : before joining thread 9.
+Main    : thread 9 done
+Main    : before joining thread 10.
+Main    : thread 10 done
+Main    : before joining thread 11.
+Main    : thread 11 done
+Main    : before joining thread 12.
+Finished running 21-07-18-1510_neo4j_astar_thread12_hot. Test took: 22.80s
+Main    : thread 12 done
+Main    : before joining thread 13.
+Main    : thread 13 done
+Main    : before joining thread 14.
+Main    : thread 14 done
+Main    : before joining thread 15.
+Main    : thread 15 done
+Finished running main thread. All tests took: 93.76s
+Max mem used: 4920MB
