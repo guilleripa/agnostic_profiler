@@ -1,0 +1,74 @@
+Main    : create and start thread 0.
+Loading pathfinder neo4j
+Main    : create and start thread 1.
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Path finder already loaded :)
+Thread 1: Start experiments
+Thread 1: Run cold start queries
+Main    : create and start thread 2.
+Path finder already loaded :)
+Thread 2: Start experiments
+Thread 2: Run cold start queries
+Main    : create and start thread 3.
+Path finder already loaded :)
+Thread 3: Start experiments
+Thread 3: Run cold start queries
+Main    : create and start thread 4.
+Path finder already loaded :)
+Thread 4: Start experiments
+Thread 4: Run cold start queries
+Main    : create and start thread 5.
+Path finder already loaded :)
+Thread 5: Start experiments
+Thread 5: Run cold start queries
+Main    : create and start thread 6.
+Path finder already loaded :)
+Thread 6: Start experiments
+Thread 6: Run cold start queries
+Main    : create and start thread 7.
+Path finder already loaded :)
+Thread 7: Start experiments
+Thread 7: Run cold start queries
+Main    : before joining thread 0.
+Finished running 21-07-18-0330_neo4j_dijkstra_thread4_cold. Test took: 162.52s
+Thread 4: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread1_cold. Test took: 173.52s
+Thread 1: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread3_cold. Test took: 177.80s
+Thread 3: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread2_cold. Test took: 202.75s
+Thread 2: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread7_cold. Test took: 209.29s
+Thread 7: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread5_cold. Test took: 235.49s
+Thread 5: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread0_cold. Test took: 248.78s
+Thread 0: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread6_cold. Test took: 296.37s
+Thread 6: Run hot start queries
+Finished running 21-07-18-0330_neo4j_dijkstra_thread4_hot. Test took: 182.02s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread1_hot. Test took: 195.51s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread3_hot. Test took: 193.22s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread2_hot. Test took: 199.00s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread7_hot. Test took: 196.60s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread5_hot. Test took: 195.15s
+Finished running 21-07-18-0330_neo4j_dijkstra_thread0_hot. Test took: 196.01s
+Main    : thread 0 done
+Main    : before joining thread 1.
+Main    : thread 1 done
+Main    : before joining thread 2.
+Main    : thread 2 done
+Main    : before joining thread 3.
+Main    : thread 3 done
+Main    : before joining thread 4.
+Main    : thread 4 done
+Main    : before joining thread 5.
+Main    : thread 5 done
+Main    : before joining thread 6.
+Finished running 21-07-18-0330_neo4j_dijkstra_thread6_hot. Test took: 193.74s
+Main    : thread 6 done
+Main    : before joining thread 7.
+Main    : thread 7 done
+Finished running main thread. All tests took: 490.66s
+Max mem used: 4974MB
