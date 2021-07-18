@@ -5,7 +5,7 @@ It follows the paper's research methodology and has options for both pathfinders
 
 To use it you have to follow the setups for each DB and then just call it with:
 ```
-python pathfinder_profiler.py --pathfinder pgsql --algorithm dijkstra
+python pathfinder_profiler.py --pathfinder pgsql --algorithm dijkstra --no_mem --num_threads 4
 ```
 
 Though remember to create a virtual env to setup the requirements.

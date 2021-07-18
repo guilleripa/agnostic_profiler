@@ -11,13 +11,19 @@ from profiler import Profiler
     help="Experiment name for the experiments.",
 )
 @click.option(
+    "--num_threads",
+    default=1,
+    type=int,
+    help="Number of concurrent connections.",
+)
+@click.option(
     "--no_mem",
     is_flag=True,
-    help="Experiment name for the experiments.",
+    help="Track max memory usage.",
 )
-def main(pathfinder, algorithm, experiment_name, no_mem):
-    prof = Profiler(measure_mem=not no_mem)
-    prof.run_experiments(
+def main(pathfinder, algorithm, experiment_name, num_threads, no_mem):
+    prof = Profiler(measure_mem=not no_mem, num_threads=num_threads)
+    prof.run_threaded_experiment(
         pathfinder, algorithm=algorithm, experiment_name=experiment_name
     )
 
