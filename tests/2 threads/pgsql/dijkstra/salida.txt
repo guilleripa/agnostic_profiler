@@ -1,0 +1,20 @@
+Main    : create and start thread 0.
+Loading pathfinder pgsql
+Main    : create and start thread 1.
+Loading pathfinder pgsql
+Main    : before joining thread 0.
+Thread 1: Start experiments
+Thread 1: Run cold start queries
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Finished running 21-07-18-1636_pgsql_dijkstra_thread1_cold. Test took: 105.47s
+Thread 1: Run hot start queries
+Finished running 21-07-18-1636_pgsql_dijkstra_thread0_cold. Test took: 111.12s
+Thread 0: Run hot start queries
+Finished running 21-07-18-1636_pgsql_dijkstra_thread1_hot. Test took: 107.40s
+Finished running 21-07-18-1636_pgsql_dijkstra_thread0_hot. Test took: 105.59s
+Main    : thread 0 done
+Main    : before joining thread 1.
+Main    : thread 1 done
+Finished running main thread. All tests took: 217.31s
+Max mem used: 1564MB

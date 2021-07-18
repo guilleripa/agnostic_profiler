@@ -1,0 +1,146 @@
+Main    : create and start thread 0.
+Loading pathfinder pgsql
+Main    : create and start thread 1.
+Loading pathfinder pgsql
+Main    : create and start thread 2.
+Loading pathfinder pgsql
+Main    : create and start thread 3.
+Loading pathfinder pgsql
+Main    : create and start thread 4.
+Loading pathfinder pgsql
+Main    : create and start thread 5.
+Loading pathfinder pgsql
+Main    : create and start thread 6.
+Loading pathfinder pgsql
+Main    : create and start thread 7.
+Loading pathfinder pgsql
+Main    : create and start thread 8.
+Thread 1: Start experiments
+Thread 1: Run cold start queries
+Thread 2: Start experiments
+Thread 2: Run cold start queries
+Path finder already loaded :)
+Thread 8: Start experiments
+Thread 8: Run cold start queries
+Main    : create and start thread 9.
+Path finder already loaded :)
+Thread 9: Start experiments
+Thread 9: Run cold start queries
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Thread 7: Start experiments
+Thread 7: Run cold start queries
+Thread 4: Start experiments
+Thread 4: Run cold start queries
+Main    : create and start thread 10.
+Path finder already loaded :)
+Thread 10: Start experiments
+Thread 10: Run cold start queries
+Main    : create and start thread 11.
+Path finder already loaded :)
+Thread 11: Start experiments
+Thread 11: Run cold start queries
+Main    : create and start thread 12.
+Path finder already loaded :)
+Thread 12: Start experiments
+Thread 12: Run cold start queries
+Main    : create and start thread 13.
+Path finder already loaded :)
+Thread 13: Start experiments
+Thread 13: Run cold start queries
+Main    : create and start thread 14.
+Path finder already loaded :)
+Thread 14: Start experiments
+Thread 14: Run cold start queries
+Main    : create and start thread 15.
+Path finder already loaded :)
+Thread 15: Start experiments
+Thread 15: Run cold start queries
+Main    : before joining thread 0.
+Thread 5: Start experiments
+Thread 5: Run cold start queries
+Thread 3: Start experiments
+Thread 3: Run cold start queries
+Thread 6: Start experiments
+Thread 6: Run cold start queries
+Finished running 21-07-18-1619_pgsql_astar_thread15_cold. Test took: 76.32s
+Thread 15: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread6_cold. Test took: 83.91s
+Thread 6: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread2_cold. Test took: 92.72s
+Thread 2: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread1_cold. Test took: 94.81s
+Thread 1: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread11_cold. Test took: 97.67s
+Thread 11: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread10_cold. Test took: 102.85s
+Thread 10: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread8_cold. Test took: 104.81s
+Thread 8: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread12_cold. Test took: 106.21s
+Thread 12: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread3_cold. Test took: 106.77s
+Thread 3: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread7_cold. Test took: 112.46s
+Thread 7: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread0_cold. Test took: 117.08s
+Thread 0: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread13_cold. Test took: 119.64s
+Thread 13: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread5_cold. Test took: 130.73s
+Thread 5: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread4_cold. Test took: 134.79s
+Thread 4: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread14_cold. Test took: 136.45s
+Thread 14: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread9_cold. Test took: 137.45s
+Thread 9: Run hot start queries
+Finished running 21-07-18-1619_pgsql_astar_thread15_hot. Test took: 97.98s
+Finished running 21-07-18-1619_pgsql_astar_thread11_hot. Test took: 112.85s
+Finished running 21-07-18-1619_pgsql_astar_thread6_hot. Test took: 135.93s
+Finished running 21-07-18-1619_pgsql_astar_thread2_hot. Test took: 135.90s
+Finished running 21-07-18-1619_pgsql_astar_thread1_hot. Test took: 135.59s
+Finished running 21-07-18-1619_pgsql_astar_thread12_hot. Test took: 133.07s
+Finished running 21-07-18-1619_pgsql_astar_thread0_hot. Test took: 124.16s
+Main    : thread 0 done
+Main    : before joining thread 1.
+Main    : thread 1 done
+Main    : before joining thread 2.
+Main    : thread 2 done
+Main    : before joining thread 3.
+Finished running 21-07-18-1619_pgsql_astar_thread7_hot. Test took: 131.82s
+Finished running 21-07-18-1619_pgsql_astar_thread10_hot. Test took: 142.02s
+Finished running 21-07-18-1619_pgsql_astar_thread8_hot. Test took: 142.00s
+Finished running 21-07-18-1619_pgsql_astar_thread5_hot. Test took: 118.46s
+Finished running 21-07-18-1619_pgsql_astar_thread14_hot. Test took: 114.89s
+Finished running 21-07-18-1619_pgsql_astar_thread3_hot. Test took: 146.58s
+Main    : thread 3 done
+Main    : before joining thread 4.
+Finished running 21-07-18-1619_pgsql_astar_thread4_hot. Test took: 119.23s
+Main    : thread 4 done
+Main    : before joining thread 5.
+Main    : thread 5 done
+Main    : before joining thread 6.
+Main    : thread 6 done
+Main    : before joining thread 7.
+Main    : thread 7 done
+Main    : before joining thread 8.
+Main    : thread 8 done
+Main    : before joining thread 9.
+Finished running 21-07-18-1619_pgsql_astar_thread13_hot. Test took: 138.58s
+Finished running 21-07-18-1619_pgsql_astar_thread9_hot. Test took: 122.37s
+Main    : thread 9 done
+Main    : before joining thread 10.
+Main    : thread 10 done
+Main    : before joining thread 11.
+Main    : thread 11 done
+Main    : before joining thread 12.
+Main    : thread 12 done
+Main    : before joining thread 13.
+Main    : thread 13 done
+Main    : before joining thread 14.
+Main    : thread 14 done
+Main    : before joining thread 15.
+Main    : thread 15 done
+Finished running main thread. All tests took: 259.95s
+Max mem used: 1577MB

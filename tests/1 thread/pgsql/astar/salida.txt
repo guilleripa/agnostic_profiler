@@ -1,0 +1,7 @@
+Loading pathfinder pgsql
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Finished running 21-07-18-1714_pgsql_astar_thread0_thread0_cold. Test took: 129.45s
+Thread 0: Run hot start queries
+Finished running 21-07-18-1714_pgsql_astar_thread0_thread0_hot. Test took: 114.39s
+Max mem used: 1634MB

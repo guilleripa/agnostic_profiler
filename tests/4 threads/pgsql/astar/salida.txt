@@ -1,0 +1,38 @@
+Main    : create and start thread 0.
+Loading pathfinder pgsql
+Main    : create and start thread 1.
+Loading pathfinder pgsql
+Main    : create and start thread 2.
+Loading pathfinder pgsql
+Main    : create and start thread 3.
+Loading pathfinder pgsql
+Main    : before joining thread 0.
+Thread 2: Start experiments
+Thread 2: Run cold start queries
+Thread 1: Start experiments
+Thread 1: Run cold start queries
+Thread 0: Start experiments
+Thread 0: Run cold start queries
+Thread 3: Start experiments
+Thread 3: Run cold start queries
+Finished running 21-07-18-1551_pgsql_astar_thread3_cold. Test took: 123.62s
+Thread 3: Run hot start queries
+Finished running 21-07-18-1551_pgsql_astar_thread0_cold. Test took: 137.57s
+Thread 0: Run hot start queries
+Finished running 21-07-18-1551_pgsql_astar_thread2_cold. Test took: 139.49s
+Thread 2: Run hot start queries
+Finished running 21-07-18-1551_pgsql_astar_thread1_cold. Test took: 139.49s
+Thread 1: Run hot start queries
+Finished running 21-07-18-1551_pgsql_astar_thread3_hot. Test took: 142.19s
+Finished running 21-07-18-1551_pgsql_astar_thread2_hot. Test took: 133.70s
+Finished running 21-07-18-1551_pgsql_astar_thread0_hot. Test took: 138.91s
+Main    : thread 0 done
+Main    : before joining thread 1.
+Finished running 21-07-18-1551_pgsql_astar_thread1_hot. Test took: 143.60s
+Main    : thread 1 done
+Main    : before joining thread 2.
+Main    : thread 2 done
+Main    : before joining thread 3.
+Main    : thread 3 done
+Finished running main thread. All tests took: 283.67s
+Max mem used: 1557MB
