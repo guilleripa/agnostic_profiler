@@ -1,7 +1,0 @@
-Loading pathfinder neo4j
-Thread 0: Start experiments
-Thread 0: Run cold start queries
-Finished running 21-07-18-0423_neo4j_dijkstra_thread0_thread0_cold. Test took: 238.22s
-Thread 0: Run hot start queries
-Finished running 21-07-18-0423_neo4j_dijkstra_thread0_thread0_hot. Test took: 300.24s
-Max mem used: 4659MB

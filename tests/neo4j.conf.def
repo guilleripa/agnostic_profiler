@@ -1,7 +1,0 @@
-dbms.memory.pagecache.warmup.enable=true
-dbms.memory.pagecache.warmup.preload=true
-dbms.memory.pagecache.warmup.profile.interval=1h
-dbms.memory.pagecache.size=3g
-
-# dbms.memory.heap.initial_size=1g
-# dbms.memory.heap.max_size=1g
