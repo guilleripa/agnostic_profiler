@@ -1,13 +1,18 @@
 # %%
 import ast
 import math
+from pathlib import Path
+
 import neo4j
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 
 # %%
-df_pgsql = pd.read_csv("21-07-16-2026_pgsql_dijkstra_cold.csv")
-df_neo4j = pd.read_csv("results/21-07-16-1849_neo4j_dijkstra_cold.csv")
+df_pgsql = pd.read_csv("tests/1 thread/pgsql/dijkstra/pgsql_dijkstra_thread0_cold.csv")
+df_neo4j = pd.read_csv(
+    "tests/1 thread/Neo4j/dijkstra/21-07-18-0423_neo4j_dijkstra_thread0_thread0_cold_old.csv"
+)
 # %%
 df_pgsql["result"] = df_pgsql["result"].apply(ast.literal_eval)
 # %%
@@ -53,6 +58,8 @@ ax = df_pgsql["num_nodes"].plot.hist(bins=bins)
 ax.xaxis.set_ticks(bins)
 ax.set_xlabel("Cantidad de nodos en el camino")
 ax.set_ylabel("Frecuencia")
+ax.grid(axis="x")
+ax.set_xticklabels(bins, rotation=45, ha="right")
 
 
 # %%
@@ -90,19 +97,48 @@ ax = km_distances.plot.hist(bins=bins)
 ax.xaxis.set_ticks(bins)
 ax.set_xlabel("Largo (Km) del camino")
 ax.set_ylabel("Frecuencia")
+ax.grid(axis="x")
+ax.set_xticklabels(bins, rotation=45, ha="right")
 # %%
 df_pgsql["distance"] = all_distances
 # %%
 df_pgsql.plot.scatter(x="distance", y="time")
+plt.xlabel("Distancia del camino (m)")
+plt.ylabel("Tiempo de resolución camino más corto (s)")
 # %%
 df_pgsql.plot.scatter(x="num_nodes", y="time")
 # %%
 df_pgsql.plot.scatter(x="num_nodes", y="distance")
+plt.ylabel("Distancia del camino (km)")
+plt.xlabel("Cantidad de nodos del camino (N)")
 # %%
 import pyarrow as pa
 
 schema = pa.schema([pa.field("result", pa.list_(pa.tuple()))])
 df_pgsql.to_parquet("results/df_pgsql_processed.pq", schema=schema)
 # %%
+
+# %%
+dijkstra_neo_hot = pd.read_csv(
+    next(Path("tests/1 thread/Neo4j/dijkstra").glob("*_hot.csv"))
+)
+dijkstra_pgsql_hot = pd.read_csv(
+    next(Path("tests/1 thread/pgsql/dijkstra").glob("*_hot.csv"))
+)
+astar_neo_hot = pd.read_csv(next(Path("tests/1 thread/Neo4j/astar").glob("*_hot.csv")))
+astar_pgsql_hot = pd.read_csv(
+    next(Path("tests/1 thread/pgsql/astar").glob("*_hot.csv"))
+)
+# %%
+dijkstra_neo_hot["result"] = dijkstra_neo_hot["result"].apply(custom_eval)
+dijkstra_pgsql_hot["result"] = dijkstra_pgsql_hot["result"].apply(ast.literal_eval)
+astar_pgsql_hot["result"] = astar_pgsql_hot["result"].apply(ast.literal_eval)
+astar_neo_hot["result"] = astar_neo_hot["result"].apply(custom_eval)
+
+# %%
+dijkstra_neo_hot["num_nodes"] = dijkstra_neo_hot["result"].str.len()
+dijkstra_pgsql_hot["num_nodes"] = dijkstra_pgsql_hot["result"].str.len()
+astar_pgsql_hot["num_nodes"] = astar_pgsql_hot["result"].str.len()
+astar_neo_hot["num_nodes"] = astar_neo_hot["result"].str.len()
 
 # %%
