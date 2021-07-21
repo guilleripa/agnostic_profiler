@@ -30,7 +30,6 @@ class DisplayMem(threading.Thread):
 class Profiler:
     def __init__(self, measure_mem=True, num_threads=1):
         self._load_node_pairs()
-        self.pathfinder = None
         self.mem_tracker = DisplayMem() if measure_mem else None
         self.num_threads = num_threads
 
@@ -41,15 +40,16 @@ class Profiler:
             for source_gid, target_gid in csv_reader:
                 self.node_pairs.append((int(source_gid), int(target_gid)))
 
-    def _load_pathfinder(self, pathfinder):
-        if pathfinder == "neo4j":
-            self.pathfinder = Neo4jPathFinder()
+    def _load_pathfinder(self, pathfinder_name):
+        if pathfinder_name == "neo4j":
+            pathfinder = Neo4jPathFinder()
         else:
-            self.pathfinder = PgSQLPathFinder(database="osm")
-            # self.pathfinder = PgSQLPathFinder()
+            # pathfinder = PgSQLPathFinder(database="osm")
+            pathfinder = PgSQLPathFinder()
+        return pathfinder
 
     def _run_pathfinder(
-        self, algorithm, node_pairs, save_results=True, experiment_name=None
+        self, pathfinder, algorithm, node_pairs, save_results=True, experiment_name=None
     ):
         start_time = time()
 
@@ -57,9 +57,7 @@ class Profiler:
         for source_gid, target_gid in node_pairs:
 
             path_start_time = time()
-            result = self.pathfinder.get_path(
-                source_gid, target_gid, algorithm=algorithm
-            )
+            result = pathfinder.get_path(source_gid, target_gid, algorithm=algorithm)
             path_elapsed_time = time() - path_start_time
 
             res_dict = {
@@ -91,26 +89,23 @@ class Profiler:
             print(f"Error while saving csv file for experiment={experiment_name}")
 
     def run_experiments(
-        self, thread_id, pathfinder, experiment_name, algorithm, node_pairs
+        self, thread_id, pathfinder_name, experiment_name, algorithm, node_pairs
     ):
         """
         arguments:
-        - pathfinder (str): Must be one of ['neo4j', 'pgsql'].
+        - pathfinder_name (str): Must be one of ['neo4j', 'pgsql'].
         - experiment_name (str): experiment identifier for csv files.
         - algorithm (str): Which algorithm to run on the pathfinder.
                 Must be one of ['dijkstra', 'astar']
         """
 
-        if self.pathfinder:
-            print("Path finder already loaded :)")
-        else:
-            print(f"Loading pathfinder {pathfinder}")
-            self._load_pathfinder(pathfinder)
+        pathfinder = self._load_pathfinder(pathfinder_name)
 
         print(f"Thread {thread_id}: Start experiments")
 
         print(f"Thread {thread_id}: Run cold start queries")
         self._run_pathfinder(
+            pathfinder,
             algorithm,
             node_pairs,
             experiment_name=f"{experiment_name}_thread{thread_id}_cold",
@@ -118,6 +113,7 @@ class Profiler:
 
         print(f"Thread {thread_id}: Run hot start queries")
         self._run_pathfinder(
+            pathfinder,
             algorithm,
             node_pairs,
             experiment_name=f"{experiment_name}_thread{thread_id}_hot",
